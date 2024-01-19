@@ -55,6 +55,7 @@ These instructions will help you set up and run SecurKey on your local machine f
 ## Step By Step Procedure
 
 -   [AS]: Create React App.
+-   [AS]: Routing by Create Browser Router (react-router-dom).
 
 ## Contributing
 
