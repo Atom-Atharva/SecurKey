@@ -1,6 +1,7 @@
 import React from "react";
 
 const Features = () => {
+
   return (
     <div className="font-['Roboto_slab']" id="features">
       <h2 className="mx-60 font-['pacifico'] text-5xl underline">Features</h2>
@@ -49,6 +50,6 @@ const Features = () => {
       </div>
     </div>
   );
-};
+
 
 export default Features;

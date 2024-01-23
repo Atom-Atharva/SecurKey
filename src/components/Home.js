@@ -5,14 +5,18 @@ import Features from "./Features";
 import Footer from "./Footer";
 
 const Home = () => {
-  return (
-    <div>
-      <Header />
-      <Hero />
-      <Features />
-      <Footer />
-    </div>
-  );
-};
+
+    return (
+        <div id="home" className="font-['Roboto_Slab']">
+            <div className="text-white">
+                <Header />
+            </div>
+            <Hero />
+            <Features />
+            <Footer />
+        </div>
+    );
+
+
 
 export default Home;
