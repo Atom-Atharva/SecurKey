@@ -4,10 +4,10 @@ SecurKey is a secure and user-friendly password manager web application built wi
 
 ## Features
 
-- **Secure Password Storage:** Utilize state-of-the-art encryption algorithms to securely store user passwords.
-- **Intuitive User Interface:** A clean and user-friendly interface for easy navigation and interaction.
-- **Cross-Platform Accessibility:** Access your passwords from any device with an internet connection.
-- **Password Generator:** Generate strong and unique passwords with customizable settings.
+-   **Secure Password Storage:** Utilize state-of-the-art encryption algorithms to securely store user passwords.
+-   **Intuitive User Interface:** A clean and user-friendly interface for easy navigation and interaction.
+-   **Cross-Platform Accessibility:** Access your passwords from any device with an internet connection.
+-   **Password Generator:** Generate strong and unique passwords with customizable settings.
 
 ## Getting Started
 
@@ -15,33 +15,33 @@ These instructions will help you set up and run SecurKey on your local machine f
 
 ### Prerequisites
 
-- Node.js and npm installed on your machine.
+-   Node.js and npm installed on your machine.
 
 ### Installation
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/your-username/securkey.git
-   ```
+    ```bash
+    git clone https://github.com/your-username/securkey.git
+    ```
 
 2. Navigate to the project directory:
 
-   ```bash
-   cd securkey
-   ```
+    ```bash
+    cd securkey
+    ```
 
 3. Install dependencies:
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
 4. Start the development server:
 
-   ```bash
-   npm start
-   ```
+    ```bash
+    npm start
+    ```
 
 5. Open your browser and visit [http://localhost:3000](http://localhost:3000).
 
@@ -54,12 +54,11 @@ These instructions will help you set up and run SecurKey on your local machine f
 
 ## Step By Step Procedure
 
-
-- [AS]: Create React App.
-- [AS]: Routing by Create Browser Router (react-router-dom).
-- [RK]: Created Login Page.
+-   [AS]: Create React App.
+-   [AS]: Routing by Create Browser Router (react-router-dom).
+-   [RK]: Created Login Page.
 -   [AS]: SignUp Page Created (Only Front-end).
-
+-   [AS]: Structured Home Page.
 
 ## Contributing
 
@@ -77,4 +76,4 @@ This project is made by Atharva and Raghav as a Group Project.
 
 ## Acknowledgments
 
-- Thanks to the React community for providing an excellent framework.
+-   Thanks to the React community for providing an excellent framework.
