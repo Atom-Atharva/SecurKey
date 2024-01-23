@@ -60,6 +60,7 @@ These instructions will help you set up and run SecurKey on your local machine f
 -   [AS]: SignUp Page Created (Only Front-end).
 -   [AS]: Structured Home Page.
 -   [AS]: Header Created For Home Page.
+-   [AS]: Hero Created HomePage.
 
 ## Contributing
 
