@@ -4,14 +4,18 @@ import { Link } from "react-router-dom";
 const Header = () => {
     return (
         <div className="flex pt-8 w-full absolute justify-between">
-            <div className="flex items-center ml-20">
-                <img
-                    src="./SVG/Project Logo.svg"
-                    alt="ProjectLogo"
-                    className="w-20"
-                />
-                <h1 className="font-['Pacifico'] text-4xl ml-4">SecurKey</h1>
-            </div>
+            <a href="#home">
+                <div className="flex items-center ml-20">
+                    <img
+                        src="./SVG/Project Logo.svg"
+                        alt="ProjectLogo"
+                        className="w-20"
+                    />
+                    <h1 className="font-['Pacifico'] text-4xl ml-4">
+                        SecurKey
+                    </h1>
+                </div>
+            </a>
             <div className="mr-20">
                 <ul className="flex justify-end mt-5">
                     <li className="mx-10 text-lg hover:underline hover:underline-offset-4">
