@@ -1,8 +1,11 @@
 import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { addUser } from "../utils/userSlice";
 
 const SignUp = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const email = useRef(null);
     const password = useRef(null);
@@ -12,7 +15,7 @@ const SignUp = () => {
         navigate("/login");
     };
 
-    const signUpHandler = () => {
+    const signUpHandler = async () => {
         if (!email.current.value) {
             alert("Enter Email Address");
             return;
@@ -26,7 +29,35 @@ const SignUp = () => {
             return;
         }
 
-        // TODO: Backend Needed.
+        const formData = {
+            email: email.current.value,
+            password: password.current.value,
+            username: email.current.value,
+        };
+
+        // Backend --> Authenticate User
+        const res = await fetch("http://localhost:8080/api/auth/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+        });
+        const data = await res.json();
+        if (data.status === 400) {
+            console.log(data.message);
+            alert("Invalid User!");
+        } else if (res.ok) {
+            dispatch(
+                addUser({
+                    email: email.current.value,
+                    username: email.current.value,
+                })
+            );
+            console.log(data.message);
+            navigate("/password");
+        } else {
+            console.error("Failed to sign up:", data.message);
+            alert("Failed to sign up. Please try again later.");
+        }
     };
 
     return (
