@@ -62,6 +62,9 @@ These instructions will help you set up and run SecurKey on your local machine f
 -   [RK]: Created Features Page
 -   [AS]: Header Created For Home Page.
 -   [AS]: Hero Created HomePage.
+-   [AS,RK]: Backend Authentication.
+-   [AS,RK]: Redux Store Added.
+-   [AS,RK]: User Slice.
 
 ## Contributing
 

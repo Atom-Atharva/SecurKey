@@ -1,11 +1,15 @@
 import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const email = useRef(null);
     const password = useRef(null);
-    function loginhandler() {
+
+    async function loginhandler() {
         if (!email.current.value) {
             alert("Enter Valid Email");
             return;
@@ -15,7 +19,36 @@ const Login = () => {
             return;
         }
 
-        //todo handle the baackend
+        const formData = {
+            email: email.current.value,
+            password: password.current.value,
+        };
+
+        // BackEnd
+        const res = await fetch("http://localhost:8080/api/auth/signin", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+        });
+        const data = await res.json();
+
+        if (data.status === 400) {
+            console.log(data.message);
+            alert("Failed to Login: " + data.message);
+        } else if (res.ok) {
+            dispatch(
+                addUser({
+                    email: email.current.value,
+                    username: email.current.value,
+                })
+            );
+
+            console.log(data.message);
+            navigate("/password");
+        } else {
+            console.error(data.message);
+            alert("Failed to Login: " + data.message);
+        }
     }
 
     function createAccounthandler() {
