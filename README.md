@@ -52,20 +52,6 @@ These instructions will help you set up and run SecurKey on your local machine f
 3. Customize your settings and preferences.
 4. Enjoy the convenience of a secure password manager!
 
-## Step By Step Procedure
-
--   [AS]: Create React App.
--   [AS]: Routing by Create Browser Router (react-router-dom).
--   [RK]: Created Login Page.
--   [AS]: SignUp Page Created (Only Front-end).
--   [AS]: Structured Home Page.
--   [RK]: Created Features Page
--   [AS]: Header Created For Home Page.
--   [AS]: Hero Created HomePage.
--   [AS,RK]: Backend Authentication.
--   [AS,RK]: Redux Store Added.
--   [AS,RK]: User Slice.
-
 ## Contributing
 
 If you'd like to contribute to SecurKey, please follow these guidelines:
