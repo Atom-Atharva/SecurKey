@@ -2,9 +2,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
-import Password from "./components/Password";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
+import PasswordPage from "./components/PasswordPage";
 
 function App() {
     const appRouter = createBrowserRouter([
@@ -22,7 +22,7 @@ function App() {
         },
         {
             path: "/password",
-            element: <Password />,
+            element: <PasswordPage />,
         },
     ]);
     return (
