@@ -13,9 +13,12 @@ const passwordSlice = createSlice({
             );
             return state;
         },
+        clearPassword: (state, action) => {
+            return [];
+        },
     },
 });
 
-export const { addPasswords, removePassword } = passwordSlice.actions;
+export const { addPasswords, removePassword, clearPassword } = passwordSlice.actions;
 
 export default passwordSlice.reducer;

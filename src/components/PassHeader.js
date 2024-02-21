@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import { clearPassword } from "../utils/passwordSlice";
 
 const PassHeader = () => {
     const user = useSelector((store) => store.user);
@@ -10,6 +11,7 @@ const PassHeader = () => {
 
     const handleLogout = () => {
         dispatch(removeUser());
+        dispatch(clearPassword());
         navigate("/");
     };
 
