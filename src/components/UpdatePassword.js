@@ -1,10 +1,12 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPasswords, removePassword } from "../utils/passwordSlice";
+import CryptoJS from "crypto-js";
 
 const UpdatePassword = () => {
     const title = useRef(null);
     const password = useRef(null);
+    const pin = useRef(null);
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();
 
@@ -17,26 +19,64 @@ const UpdatePassword = () => {
             alert("Enter Valid password");
             return;
         }
+        if (!pin.current.value) {
+            alert("Enter Valid Pin");
+            return;
+        }
 
-        const formData = {
-            title: title.current.value,
-            password: password.current.value,
-            username: user.username,
+        // Pin is Same as Password
+        const pinData = {
+            email: user.email,
+            password: pin.current.value,
         };
 
-        const res = await fetch("http://localhost:8080/api/vault/add", {
+        // BackEnd
+        const response = await fetch("http://localhost:8080/api/auth/signin", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(pinData),
         });
-        const data = await res.json();
+        const checkPin = await response.json();
 
-        if (!res.ok) {
-            console.log(data.message);
-            alert("Failed to Add Password: " + data.message);
-        } else {
-            console.log("Added Successfully");
-            dispatch(addPasswords([formData]));
+        if (response.ok) {
+            // Encryption Front-End
+            const encrypt = CryptoJS.AES.encrypt(
+                password.current.value,
+                pin.current.value
+            ).toString();
+
+            const formData = {
+                title: title.current.value,
+                password: encrypt,
+                username: user.username,
+            };
+
+            const showData = {
+                title: title.current.value,
+                password: password.current.value,
+                username: user.username,
+            };
+
+            const res = await fetch("http://localhost:8080/api/vault/add", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+            const data = await res.json();
+
+            if (!res.ok) {
+                console.log(data.message);
+                alert("Failed to Add Password: " + data.message);
+            } else {
+                console.log("Added Successfully");
+                dispatch(addPasswords([showData]));
+            }
+        }
+        // Invalid Credentials
+        else {
+            console.log(checkPin.message);
+            alert("Wrong Pin: " + checkPin.message);
+            return;
         }
     };
 
@@ -49,32 +89,64 @@ const UpdatePassword = () => {
             alert("Enter Valid password");
             return;
         }
+        if (!pin.current.value) {
+            alert("Enter Valid Pin");
+            return;
+        }
 
-        const formData = {
-            title: title.current.value,
-            password: password.current.value,
-            username: user.username,
+        const verifyUser = {
+            email: user.username,
+            password: pin.current.value,
         };
-
-        const delData = {
-            title: title.current.value,
-            username: user.username,
-        };
-
-        const res = await fetch("http://localhost:8080/api/vault/update", {
+        const response = await fetch("http://localhost:8080/api/auth/signin", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(verifyUser),
         });
-        const data = await res.json();
+        const checkPin = await response.json();
 
-        if (!res.ok) {
-            console.log(data.message);
-            alert("Failed to update Password: " + data.message);
+        if (response.ok) {
+            const encrypt = CryptoJS.AES.encrypt(
+                password.current.value,
+                pin.current.value
+            ).toString();
+
+            const formData = {
+                title: title.current.value,
+                password: encrypt,
+                username: user.username,
+            };
+
+            const showData = {
+                title: title.current.value,
+                password: password.current.value,
+                username: user.username,
+            };
+
+            const delData = {
+                title: title.current.value,
+                username: user.username,
+            };
+
+            const res = await fetch("http://localhost:8080/api/vault/update", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+            const data = await res.json();
+
+            if (!res.ok) {
+                console.log(data.message);
+                alert("Failed to update Password: " + data.message);
+            } else {
+                console.log("Updated Successfully");
+                dispatch(removePassword(delData));
+                dispatch(addPasswords([showData]));
+            }
         } else {
-            console.log("Updated Successfully");
-            dispatch(removePassword(delData));
-            dispatch(addPasswords([formData]));
+            console.log(checkPin.message);
+            alert("Wrong Pin: " + checkPin.message);
+            return;
         }
     };
 
@@ -85,7 +157,7 @@ const UpdatePassword = () => {
                 <span> Password</span>
             </div>
 
-            <div className="bg-[#D9D9D9] w-3/4 p-4 mt-4">
+            <div className="bg-[#D9D9D9] w-10/12 p-4 mt-4 rounded-lg">
                 <div className="flex flex-col gap-2 items-center w-full">
                     <div className="text-2xl flex flex-col gap-2 w-3/4">
                         <label>Name</label>
@@ -103,6 +175,15 @@ const UpdatePassword = () => {
                             placeholder="Enter Your Password"
                             className="bg-[#a5a5a5] px-4 py-2 rounded-lg placeholder:text-gray-600"
                             ref={password}
+                        />
+                    </div>
+                    <div className="text-2xl flex flex-col gap-2 w-3/4">
+                        <label>PIN</label>
+                        <input
+                            type="text"
+                            placeholder="Enter SecurKey Password"
+                            className="bg-[#a5a5a5] px-4 py-2 rounded-lg placeholder:text-gray-600"
+                            ref={pin}
                         />
                     </div>
 

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { removePassword } from "../utils/passwordSlice";
@@ -7,6 +8,7 @@ import { removePassword } from "../utils/passwordSlice";
 const PasswordElements = ({ data }) => {
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();
+    const [visible, setVisible] = useState(false);
 
     const handleDelete = async () => {
         const delData = {
@@ -34,9 +36,14 @@ const PasswordElements = ({ data }) => {
         <div className="flex items-baseline">
             <p className="mr-10 w-1/4">{data.title}</p>
             <div className="bg-[#A5A5A5] rounded-lg my-2 w-full flex justify-between items-baseline px-4 py-2">
-                <p className="ml-3">{data.password}</p>
+                <p className="ml-3">
+                    {visible ? data.password : "*************"}
+                </p>
                 <span className="ml-3">
-                    <FaRegEye />
+                    <FaRegEyeSlash
+                        onMouseDown={() => setVisible(true)}
+                        onMouseUp={() => setVisible(false)}
+                    />
                 </span>
             </div>
             <span className="mx-5 cursor-pointer" onClick={handleDelete}>

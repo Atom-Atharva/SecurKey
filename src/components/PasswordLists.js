@@ -9,7 +9,7 @@ const PasswordLists = () => {
             <div className="text-5xl">
                 <span className="font-['pacifico'] ">Your</span> Passwords
             </div>
-            <div className="bg-[#D9D9D9] w-auto rounded-sm text-xl mt-4 p-4">
+            <div className="bg-[#D9D9D9] w-auto h-[400px] rounded-lg text-xl mt-4 p-4 overflow-auto">
                 {!password || password?.length === 0 ? (
                     <h2>No Passwords Saved!</h2>
                 ) : (

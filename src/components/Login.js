@@ -40,6 +40,7 @@ const Login = () => {
                 addUser({
                     email: email.current.value,
                     username: email.current.value,
+                    pin: password.current.value,
                 })
             );
 
