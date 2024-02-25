@@ -5,6 +5,7 @@ import UpdatePassword from "./UpdatePassword";
 import { useDispatch, useSelector } from "react-redux";
 import { addPasswords } from "../utils/passwordSlice";
 import { useNavigate } from "react-router-dom";
+import CryptoJS from "crypto-js";
 
 const PasswordPage = () => {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const PasswordPage = () => {
         const userData = {
             username: user.username,
         };
+
         const res = await fetch("http://localhost:8080/api/vault/show", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -26,15 +28,23 @@ const PasswordPage = () => {
             console.log(data.message);
             return;
         } else {
-            dispatch(addPasswords(data));
+            // Decrypting
+            const decryptArray = data.map((object) => {
+                // Decrypt
+                const bytes = CryptoJS.AES.decrypt(object.password, user.pin);
+                const decrypt = bytes.toString(CryptoJS.enc.Utf8);
+
+                return { ...object, password: decrypt };
+            });
+            dispatch(addPasswords(decryptArray));
         }
     };
 
     useEffect(() => {
-        if (!user) {
-            navigate("/login");
-            return;
-        }
+        // if (!user) {
+        //     navigate("/login");
+        //     return;
+        // }
 
         console.log("Called");
         getPasswords();
@@ -44,10 +54,10 @@ const PasswordPage = () => {
         <div className="font-['Roboto_slab']">
             <PassHeader />
             <div className="flex w-full">
-                <div className="mt-52 w-1/2">
+                <div className="mt-52 w-7/12">
                     <PasswordLists />
                 </div>
-                <div className="mt-52 ml-20 w-1/2">
+                <div className="mt-52 ml-20 w-5/12">
                     <UpdatePassword />
                 </div>
             </div>

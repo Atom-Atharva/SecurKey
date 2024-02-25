@@ -7,7 +7,6 @@ SecurKey is a secure and user-friendly password manager web application built wi
 -   **Secure Password Storage:** Utilize state-of-the-art encryption algorithms to securely store user passwords.
 -   **Intuitive User Interface:** A clean and user-friendly interface for easy navigation and interaction.
 -   **Cross-Platform Accessibility:** Access your passwords from any device with an internet connection.
--   **Password Generator:** Generate strong and unique passwords with customizable settings.
 
 ## Getting Started
 
