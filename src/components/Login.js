@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../utils/userSlice";
+import { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -11,11 +13,11 @@ const Login = () => {
 
     async function loginhandler() {
         if (!email.current.value) {
-            alert("Enter Valid Email");
+            toast.error("Enter Valid Email");
             return;
         }
         if (!password.current.value) {
-            alert("Enter Valid password");
+            toast.error("Enter Valid password");
             return;
         }
 
@@ -34,7 +36,7 @@ const Login = () => {
 
         if (data.status === 400) {
             console.log(data.message);
-            alert("Failed to Login: " + data.message);
+            toast.error("Failed to Login: " + data.message);
         } else if (res.ok) {
             dispatch(
                 addUser({
@@ -43,12 +45,12 @@ const Login = () => {
                     pin: password.current.value,
                 })
             );
-
+         
             console.log(data.message);
             navigate("/password");
         } else {
             console.error(data.message);
-            alert("Failed to Login: " + data.message);
+            toast.error("Failed to Login: " + data.message);
         }
     }
 
@@ -58,6 +60,9 @@ const Login = () => {
 
     return (
         <div className="flex font-['Roboto_slab']">
+             <div>
+                <Toaster  position="top-center" reverseOrder={false} />
+            </div>
             <div className="w-6/12 h-screen">
                 <img
                     className="w-full h-full object-cover"

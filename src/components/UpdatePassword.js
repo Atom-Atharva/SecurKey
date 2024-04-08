@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPasswords, removePassword } from "../utils/passwordSlice";
+import toast from "react-hot-toast";
 import CryptoJS from "crypto-js";
 
 const UpdatePassword = () => {
@@ -12,15 +13,15 @@ const UpdatePassword = () => {
 
     const handleNewPassword = async () => {
         if (!title.current.value) {
-            alert("Enter Valid Name");
+            toast.error("Enter Valid Name");
             return;
         }
         if (!password.current.value) {
-            alert("Enter Valid password");
+            toast.error("Enter Valid Password");
             return;
         }
         if (!pin.current.value) {
-            alert("Enter Valid Pin");
+            toast.error("Enter Valid Pin");
             return;
         }
 
@@ -31,6 +32,7 @@ const UpdatePassword = () => {
         };
 
         // BackEnd
+
         const response = await fetch("http://localhost:8080/api/auth/signin", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -66,31 +68,35 @@ const UpdatePassword = () => {
 
             if (!res.ok) {
                 console.log(data.message);
-                alert("Failed to Add Password: " + data.message);
+                toast.error(data.message);
             } else {
                 console.log("Added Successfully");
+                toast.success("Added Successfully");
+                title.current.value = null;
+                pin.current.value = null;
+                password.current.value = null;
                 dispatch(addPasswords([showData]));
             }
         }
         // Invalid Credentials
         else {
             console.log(checkPin.message);
-            alert("Wrong Pin: " + checkPin.message);
+            toast.error(checkPin.message);
             return;
         }
     };
 
     const updateHandler = async () => {
         if (!title.current.value) {
-            alert("Enter Valid Name");
+            toast.error("Enter Valid Name");
             return;
         }
         if (!password.current.value) {
-            alert("Enter Valid password");
+            toast.error("Enter Valid Password");
             return;
         }
         if (!pin.current.value) {
-            alert("Enter Valid Pin");
+            toast.error("Enter Valid Pin");
             return;
         }
 
@@ -137,65 +143,69 @@ const UpdatePassword = () => {
 
             if (!res.ok) {
                 console.log(data.message);
-                alert("Failed to update Password: " + data.message);
+                toast.error(data.message);
             } else {
                 console.log("Updated Successfully");
+                toast.success("Updated Successfully");
+                title.current.value = null;
+                pin.current.value = null;
+                password.current.value = null;
                 dispatch(removePassword(delData));
                 dispatch(addPasswords([showData]));
             }
         } else {
             console.log(checkPin.message);
-            alert("Wrong Pin: " + checkPin.message);
+            toast.error(checkPin.message);
             return;
         }
     };
 
     return (
-        <div>
+        <div className="border-l border-black pl-6">
             <div className="text-5xl">
                 <span className="font-['pacifico']">Create/Update</span>
                 <span> Password</span>
             </div>
 
-            <div className="bg-[#D9D9D9] w-10/12 p-4 mt-4 rounded-lg">
+            <div className="w-10/12 p-4 mt-4">
                 <div className="flex flex-col gap-2 items-center w-full">
                     <div className="text-2xl flex flex-col gap-2 w-3/4">
-                        <label>Name</label>
+                        <label className="font-bold">Name</label>
                         <input
                             type="text"
                             placeholder="Enter Name"
-                            className="bg-[#a5a5a5] px-4 py-2 rounded-lg placeholder:text-gray-600"
+                            className="border-black border-b-2 px-4 py-2 placeholder:text-gray-600 focus:outline-none"
                             ref={title}
                         />
                     </div>
                     <div className="text-2xl flex flex-col gap-2 w-3/4">
-                        <label>Password</label>
+                        <label className="font-bold">Password</label>
                         <input
                             type="text"
                             placeholder="Enter Your Password"
-                            className="bg-[#a5a5a5] px-4 py-2 rounded-lg placeholder:text-gray-600"
+                            className="border-black border-b-2 px-4 py-2 placeholder:text-gray-600 focus:outline-none"
                             ref={password}
                         />
                     </div>
                     <div className="text-2xl flex flex-col gap-2 w-3/4">
-                        <label>PIN</label>
+                        <label className="font-bold">PIN</label>
                         <input
-                            type="text"
+                            type="password"
                             placeholder="Enter SecurKey Password"
-                            className="bg-[#a5a5a5] px-4 py-2 rounded-lg placeholder:text-gray-600"
+                            className="border-black border-b-2 px-4 py-2 placeholder:text-gray-600 focus:outline-none"
                             ref={pin}
                         />
                     </div>
 
                     <div className="flex">
                         <button
-                            className="m-4 rounded-lg p-2 px-4 bg-[#a5a5a5] hover:bg-[#929292]"
+                            className="m-4 rounded-lg p-2 px-4 bg-[#D9D9D9] hover:bg-[#a5a5a5]"
                             onClick={handleNewPassword}
                         >
                             New Password
                         </button>
                         <button
-                            className="m-4  rounded-lg p-2 px-4 bg-[#a5a5a5] hover:bg-[#929292]"
+                            className="m-4  rounded-lg p-2 px-4 bg-[#D9D9D9] hover:bg-[#a5a5a5]"
                             onClick={updateHandler}
                         >
                             Update Password
