@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPasswords } from "../utils/passwordSlice";
 import { useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
+import { Toaster } from "react-hot-toast";
 
 const PasswordPage = () => {
     const dispatch = useDispatch();
@@ -52,6 +53,9 @@ const PasswordPage = () => {
 
     return (
         <div className="font-['Roboto_slab']">
+            <div>
+                <Toaster position="bottom-right" reverseOrder={false} />
+            </div>
             <PassHeader />
             <div className="flex w-full">
                 <div className="mt-52 w-7/12">
