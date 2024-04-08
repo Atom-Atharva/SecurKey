@@ -6,8 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPasswords } from "../utils/passwordSlice";
 import { useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
-import { Toaster } from "react-hot-toast";
-import { BASE_URL } from "../utils/constants";
 
 const PasswordPage = () => {
     const dispatch = useDispatch();

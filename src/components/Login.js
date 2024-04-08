@@ -46,7 +46,7 @@ const Login = () => {
                     pin: password.current.value,
                 })
             );
-
+         
             console.log(data.message);
             navigate("/password");
         } else {
