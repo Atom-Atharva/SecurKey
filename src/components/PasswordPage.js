@@ -41,10 +41,10 @@ const PasswordPage = () => {
     };
 
     useEffect(() => {
-        // if (!user) {
-        //     navigate("/login");
-        //     return;
-        // }
+        if (!user) {
+            navigate("/login");
+            return;
+        }
 
         console.log("Called");
         getPasswords();

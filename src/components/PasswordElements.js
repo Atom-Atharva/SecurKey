@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
