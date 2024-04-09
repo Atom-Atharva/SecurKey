@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { addUser } from "../utils/userSlice";
 import toast, { Toaster } from "react-hot-toast";
+import { BASE_URL } from "../utils/constants";
+
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -37,7 +39,7 @@ const SignUp = () => {
         };
 
         // Backend --> Authenticate User
-        const res = await fetch("http://localhost:8080/api/auth/signup", {
+        const res = await fetch(`${BASE_URL}/api/auth/signup`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),
@@ -46,6 +48,7 @@ const SignUp = () => {
         if (data.status === 400) {
             console.log(data.message);
             toast.error("Invalid User!")
+
         } else if (res.ok) {
             dispatch(
                 addUser({

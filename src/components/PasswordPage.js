@@ -7,6 +7,9 @@ import { addPasswords } from "../utils/passwordSlice";
 import { useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import { Toaster } from "react-hot-toast";
+import { BASE_URL } from "../utils/constants";
+
+
 
 const PasswordPage = () => {
     const dispatch = useDispatch();
@@ -18,7 +21,7 @@ const PasswordPage = () => {
             username: user.username,
         };
 
-        const res = await fetch("http://localhost:8080/api/vault/show", {
+        const res = await fetch(`${BASE_URL}/api/vault/show`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userData),

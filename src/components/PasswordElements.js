@@ -4,6 +4,8 @@ import { RiDeleteBinFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { removePassword } from "../utils/passwordSlice";
 import toast from "react-hot-toast";
+import { BASE_URL } from "../utils/constants";
+
 
 const PasswordElements = ({ data }) => {
     const user = useSelector((store) => store.user);
@@ -16,7 +18,7 @@ const PasswordElements = ({ data }) => {
             username: user.username,
         };
 
-        const res = await fetch("http://localhost:8080/api/vault/delete", {
+        const res = await fetch(`${BASE_URL}/api/vault/delete`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(delData),

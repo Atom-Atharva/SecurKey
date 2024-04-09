@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { addUser } from "../utils/userSlice";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
+import { BASE_URL } from "../utils/constants";
+
 
 const Login = () => {
     const navigate = useNavigate();
@@ -27,7 +29,7 @@ const Login = () => {
         };
 
         // BackEnd
-        const res = await fetch("http://localhost:8080/api/auth/signin", {
+        const res = await fetch(`${BASE_URL}/api/auth/signin`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),
@@ -60,6 +62,7 @@ const Login = () => {
 
     return (
         <div className="flex font-['Roboto_slab']">
+
              <div>
                 <Toaster  position="top-center" reverseOrder={false} />
             </div>
