@@ -29,9 +29,6 @@ const PassHeader = () => {
                     </h1>
                 </div>
             </a>
-            <div className="flex items-center mx-10 text-lg font-bold">
-                Welcome to your Vault
-            </div>
             <div className="items-center mr-20">
                 <ul className="flex justify-end mt-5">
                     <li className="mx-10 text-lg underline underline-offset-4 flex">

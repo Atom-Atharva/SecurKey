@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { addUser } from "../utils/userSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const SignUp = () => {
 
     const signUpHandler = async () => {
         if (!email.current.value) {
-            alert("Enter Email Address");
+            toast.error("Enter Email Address");
             return;
         }
         if (
@@ -25,7 +26,7 @@ const SignUp = () => {
             !confPassword.current.value ||
             password.current.value !== confPassword.current.value
         ) {
-            alert("Invalid Password or Confirm Password");
+            toast.error("Invalid Password or Confirm Password");
             return;
         }
 
@@ -44,7 +45,7 @@ const SignUp = () => {
         const data = await res.json();
         if (data.status === 400) {
             console.log(data.message);
-            alert("Invalid User!");
+            toast.error("Invalid User!")
         } else if (res.ok) {
             dispatch(
                 addUser({
@@ -57,12 +58,15 @@ const SignUp = () => {
             navigate("/password");
         } else {
             console.error("Failed to sign up:", data.message);
-            alert("Failed to sign up. Please try again later.");
+            toast.error("Failed to sign up. Please try again later.");
         }
     };
 
     return (
         <div className="flex font-['Roboto_Slab']">
+            <div>
+                <Toaster position="top-center" reverseOrder={false} />
+            </div>
             <div className="w-6/12">
                 <form
                     className="my-10 mx-48 p-2"
