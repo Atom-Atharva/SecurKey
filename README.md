@@ -45,6 +45,8 @@ These instructions will help you set up and run SecurKey on your local machine f
 
 5. Open your browser and visit [http://localhost:3000](http://localhost:3000).
 
+6. Website is live on [https://secur-key.vercel.app/](https://secur-key.vercel.app/).
+
 ## Usage
 
 1. Register for a new account or log in if you already have one.
