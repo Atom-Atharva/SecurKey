@@ -6,6 +6,7 @@ import { removePassword } from "../utils/passwordSlice";
 import toast from "react-hot-toast";
 import { BASE_URL } from "../utils/constants";
 
+
 const PasswordElements = ({ data }) => {
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();

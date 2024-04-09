@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
 import { BASE_URL } from "../utils/constants";
 
+
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const Login = () => {
                     pin: password.current.value,
                 })
             );
-
+         
             console.log(data.message);
             navigate("/password");
         } else {
@@ -61,8 +62,9 @@ const Login = () => {
 
     return (
         <div className="flex font-['Roboto_slab']">
-            <div>
-                <Toaster position="top-center" reverseOrder={false} />
+
+             <div>
+                <Toaster  position="top-center" reverseOrder={false} />
             </div>
             <div className="w-6/12 h-screen">
                 <img

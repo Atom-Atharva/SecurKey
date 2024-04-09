@@ -33,8 +33,8 @@ const UpdatePassword = () => {
         };
 
         // BackEnd
-
         const response = await fetch(`${BASE_URL}/api/auth/signin`, {
+
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(pinData),

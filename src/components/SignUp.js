@@ -5,6 +5,7 @@ import { addUser } from "../utils/userSlice";
 import toast, { Toaster } from "react-hot-toast";
 import { BASE_URL } from "../utils/constants";
 
+
 const SignUp = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -46,7 +47,8 @@ const SignUp = () => {
         const data = await res.json();
         if (data.status === 400) {
             console.log(data.message);
-            toast.error("Invalid User!");
+            toast.error("Invalid User!")
+
         } else if (res.ok) {
             dispatch(
                 addUser({
