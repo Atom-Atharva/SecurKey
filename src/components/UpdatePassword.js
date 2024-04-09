@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPasswords, removePassword } from "../utils/passwordSlice";
 import toast from "react-hot-toast";
 import CryptoJS from "crypto-js";
+import { BASE_URL } from "../utils/constants";
 
 const UpdatePassword = () => {
     const title = useRef(null);
@@ -33,7 +34,7 @@ const UpdatePassword = () => {
 
         // BackEnd
 
-        const response = await fetch("http://localhost:8080/api/auth/signin", {
+        const response = await fetch(`${BASE_URL}/api/auth/signin`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(pinData),
@@ -59,7 +60,7 @@ const UpdatePassword = () => {
                 username: user.username,
             };
 
-            const res = await fetch("http://localhost:8080/api/vault/add", {
+            const res = await fetch(`${BASE_URL}/api/vault/add`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
@@ -104,7 +105,7 @@ const UpdatePassword = () => {
             email: user.username,
             password: pin.current.value,
         };
-        const response = await fetch("http://localhost:8080/api/auth/signin", {
+        const response = await fetch(`${BASE_URL}/api/auth/signin`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(verifyUser),
@@ -134,7 +135,7 @@ const UpdatePassword = () => {
                 username: user.username,
             };
 
-            const res = await fetch("http://localhost:8080/api/vault/update", {
+            const res = await fetch(`${BASE_URL}/api/vault/update`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
